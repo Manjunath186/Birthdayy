@@ -5379,7 +5379,7 @@ text-align: center;
 ========================================================= */
 
 .blow-btn {
-  position: fixed;
+  position: absolute;
 
   left: 50%;
   bottom: 52px;
@@ -8274,4 +8274,12 @@ text-shadow:
 
   text-shadow:
     0 0 8px rgba(244,201,93,.5) !important;
+}
+/* PAGE 5 NEXT - FINAL FIX */
+#scene5 .page5-next-btn {
+  position: fixed !important;
+  left: 50% !important;
+  bottom: 55px !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
 }
