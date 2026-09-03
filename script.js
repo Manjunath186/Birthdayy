@@ -826,3 +826,36 @@ page8Gift.addEventListener("click", function () {
   }, 1200);
 
 });
+// Button click sound for all pages
+document.addEventListener("pointerdown", function (event) {
+
+  const button = event.target.closest("button");
+
+  if (!button) return;
+
+  const AudioContext =
+    window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContext) return;
+
+  const audioCtx = new AudioContext();
+
+  const oscillator = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.value = 700;
+
+  gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioCtx.currentTime + 0.12
+  );
+
+  oscillator.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  oscillator.start();
+  oscillator.stop(audioCtx.currentTime + 0.12);
+
+});
