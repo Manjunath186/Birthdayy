@@ -825,21 +825,54 @@ page8Gift.addEventListener("click", function () {
 
   }, 1200);
 
-  
+
 });
 // =========================================================
 // BUTTON SOUND FOR ALL BUTTONS
 // =========================================================
 
-const buttonClickSound = new Audio("button-click.wav");
+let buttonAudioCtx = null;
 
-document.addEventListener("click", function (event) {
+document.addEventListener("pointerdown", function (event) {
 
   const button = event.target.closest("button");
 
   if (!button) return;
 
-  buttonClickSound.currentTime = 0;
-  buttonClickSound.play().catch(() => {});
+  if (!buttonAudioCtx) {
+    buttonAudioCtx =
+      new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  if (buttonAudioCtx.state === "suspended") {
+    buttonAudioCtx.resume();
+  }
+
+  const oscillator = buttonAudioCtx.createOscillator();
+  const gain = buttonAudioCtx.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(
+    650,
+    buttonAudioCtx.currentTime
+  );
+
+  gain.gain.setValueAtTime(
+    0.08,
+    buttonAudioCtx.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    buttonAudioCtx.currentTime + 0.12
+  );
+
+  oscillator.connect(gain);
+  gain.connect(buttonAudioCtx.destination);
+
+  oscillator.start();
+  oscillator.stop(
+    buttonAudioCtx.currentTime + 0.12
+  );
 
 });
