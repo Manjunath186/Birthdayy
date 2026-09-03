@@ -899,3 +899,16 @@ document.addEventListener("click", function () {
   backgroundMusic.play().catch(() => {});
 
 });
+const backgroundMusic = new Audio("./royal-background-music.wav");
+
+backgroundMusic.volume = 0.12;
+
+document.addEventListener("click", function () {
+  backgroundMusic.play()
+    .then(() => {
+      console.log("BACKGROUND MUSIC PLAYING");
+    })
+    .catch((error) => {
+      console.log("BACKGROUND MUSIC ERROR:", error);
+    });
+});
