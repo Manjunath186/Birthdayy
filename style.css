@@ -8286,3 +8286,6 @@ text-shadow:
 #scene5 .page5-next-btn:hover {
   transform: translateX(-50%) !important;
 }
+#scene6 .blow-btn:hover {
+  transform: translateX(-50%) !important;
+}
