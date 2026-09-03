@@ -876,39 +876,3 @@ document.addEventListener("pointerdown", function (event) {
   );
 
 });
-// =========================================================
-// SOFT BACKGROUND MUSIC
-// Plays on Pages 1–6 and 8
-// Page 7 uses the birthday song instead
-// =========================================================
-
-const backgroundMusic =
-  new Audio("royal-background-music.wav");
-
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.12;
-
-document.addEventListener("click", function () {
-
-  // Don't play background music on Page 7
-  if (currentScene === 6) {
-    backgroundMusic.pause();
-    return;
-  }
-
-  backgroundMusic.play().catch(() => {});
-
-});
-const backgroundMusic = new Audio("./royal-background-music.wav");
-
-backgroundMusic.volume = 0.12;
-
-document.addEventListener("click", function () {
-  backgroundMusic.play()
-    .then(() => {
-      console.log("BACKGROUND MUSIC PLAYING");
-    })
-    .catch((error) => {
-      console.log("BACKGROUND MUSIC ERROR:", error);
-    });
-});
