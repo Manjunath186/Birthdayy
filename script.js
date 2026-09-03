@@ -826,42 +826,12 @@ page8Gift.addEventListener("click", function () {
   }, 1200);
 
 });
-// Button click sound for all pages
-document.addEventListener("pointerdown", function (event) {
-
-  const button = event.target.closest("button");
-
-  if (!button) return;
-
-  const AudioContext =
-    window.AudioContext || window.webkitAudioContext;
-
-  if (!AudioContext) return;
-
-  const audioCtx = new AudioContext();
-
-  const oscillator = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-
-  oscillator.type = "sine";
-  oscillator.frequency.value = 700;
-
-  gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    audioCtx.currentTime + 0.12
-  );
-
-  oscillator.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  oscillator.start();
-  oscillator.stop(audioCtx.currentTime + 0.12);
-
-});
 // =========================================================
-// BUTTON CLICK SOUND
+// BUTTON SOUND FOR ALL BUTTONS
 // =========================================================
+
+const buttonAudioContext =
+  new (window.AudioContext || window.webkitAudioContext)();
 
 document.addEventListener("pointerdown", function (event) {
 
@@ -869,29 +839,33 @@ document.addEventListener("pointerdown", function (event) {
 
   if (!button) return;
 
-  const AudioContext =
-    window.AudioContext || window.webkitAudioContext;
+  if (buttonAudioContext.state === "suspended") {
+    buttonAudioContext.resume();
+  }
 
-  if (!AudioContext) return;
-
-  const audioCtx = new AudioContext();
-
-  const oscillator = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+  const oscillator = buttonAudioContext.createOscillator();
+  const gain = buttonAudioContext.createGain();
 
   oscillator.type = "sine";
-  oscillator.frequency.value = 700;
+  oscillator.frequency.setValueAtTime(
+    700,
+    buttonAudioContext.currentTime
+  );
 
-  gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+  gain.gain.setValueAtTime(
+    0.06,
+    buttonAudioContext.currentTime
+  );
+
   gain.gain.exponentialRampToValueAtTime(
     0.001,
-    audioCtx.currentTime + 0.12
+    buttonAudioContext.currentTime + 0.1
   );
 
   oscillator.connect(gain);
-  gain.connect(audioCtx.destination);
+  gain.connect(buttonAudioContext.destination);
 
-  oscillator.start();
-  oscillator.stop(audioCtx.currentTime + 0.12);
+  oscillator.start(buttonAudioContext.currentTime);
+  oscillator.stop(buttonAudioContext.currentTime + 0.1);
 
 });
