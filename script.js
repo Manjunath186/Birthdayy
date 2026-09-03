@@ -85,15 +85,6 @@ function showScene(index) {
 
   currentScene = index;
 
-// Background music
-if (backgroundMusic) {
-  if (currentScene === 6) {
-    backgroundMusic.pause();
-  } else {
-    backgroundMusic.play().catch(() => {});
-  }
-}
-
 updateProgress();
 
 
@@ -462,11 +453,7 @@ const scene7 =
 
 const birthdayAudio =
   document.getElementById("birthdayAudio");
-  const backgroundMusic =
-  document.getElementById("backgroundMusic");
-
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.12;
+  
 
 const songControlBtn =
   document.getElementById("songControlBtn");
