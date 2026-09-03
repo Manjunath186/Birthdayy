@@ -6115,7 +6115,8 @@ pointer-events: auto;
       transparent 0 48%,
       #f4c95d 49% 52%,
       transparent 53%
-    ),
+    );
+}
     /* =========================================================
    PAGE 7 - BIRTHDAY SONG FOR HER
 ========================================================= */
@@ -6134,6 +6135,8 @@ pointer-events: auto;
 
   text-align: center !important;
 }
+
+
 
 /* =========================================================
    ROYAL TOP TITLE
