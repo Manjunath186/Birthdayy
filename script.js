@@ -825,6 +825,7 @@ page8Gift.addEventListener("click", function () {
 
   }, 1200);
 
+  
 });
 // =========================================================
 // BUTTON SOUND FOR ALL BUTTONS
