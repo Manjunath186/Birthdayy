@@ -830,42 +830,15 @@ page8Gift.addEventListener("click", function () {
 // BUTTON SOUND FOR ALL BUTTONS
 // =========================================================
 
-const buttonAudioContext =
-  new (window.AudioContext || window.webkitAudioContext)();
+const buttonClickSound = new Audio("button-click.wav");
 
-document.addEventListener("pointerdown", function (event) {
+document.addEventListener("click", function (event) {
 
   const button = event.target.closest("button");
 
   if (!button) return;
 
-  if (buttonAudioContext.state === "suspended") {
-    buttonAudioContext.resume();
-  }
-
-  const oscillator = buttonAudioContext.createOscillator();
-  const gain = buttonAudioContext.createGain();
-
-  oscillator.type = "sine";
-  oscillator.frequency.setValueAtTime(
-    700,
-    buttonAudioContext.currentTime
-  );
-
-  gain.gain.setValueAtTime(
-    0.06,
-    buttonAudioContext.currentTime
-  );
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    buttonAudioContext.currentTime + 0.1
-  );
-
-  oscillator.connect(gain);
-  gain.connect(buttonAudioContext.destination);
-
-  oscillator.start(buttonAudioContext.currentTime);
-  oscillator.stop(buttonAudioContext.currentTime + 0.1);
+  buttonClickSound.currentTime = 0;
+  buttonClickSound.play().catch(() => {});
 
 });
